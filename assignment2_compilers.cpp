@@ -42,13 +42,13 @@ int main(){
     vector<string> input_str;
     
     // Read input from the user
-    std::string input;
-    std::cout << "Enter a postfix expression with a $ at the end:\n";
-    std::getline(std::cin, input); // Read the full line of input from the user
+    string input;
+    cout << "Enter a postfix expression with a $ at the end:\n";
+    getline(cin, input); // Read the full line of input from the user
 
     // Create a stream object from the input string
-    std::istringstream stream(input);
-    std::string word;
+    istringstream stream(input);
+    string word;
 
     // Extract and store each word from stream
     while (stream >> word) {
@@ -61,7 +61,7 @@ int main(){
         cout << "Enter the value of " << word << ": ";
         cin >> val;
         
-        // Search for word in original input string and replace with user input
+        // Search for word in original input string and replace word with user provided value
         for(int i = 0; i < input_str.size(); i++){
             if(input_str[i] == word)
                 input_str[i] = val;
@@ -71,7 +71,6 @@ int main(){
 
     input_str.pop_back(); // Eliminate terminating character for final processing ('$')
 
-    // Evaluate final expression 
     int result = eval(input_str);
     cout << "Expressions value is " << result << '\n';
 
