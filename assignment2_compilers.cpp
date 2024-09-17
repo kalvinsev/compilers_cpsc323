@@ -61,6 +61,7 @@ int main(){
         cout << "Enter the value of " << word << ": ";
         cin >> val;
         
+        // Search for word in original input string and replace with user input
         for(int i = 0; i < input_str.size(); i++){
             if(input_str[i] == word)
                 input_str[i] = val;
@@ -70,6 +71,7 @@ int main(){
 
     input_str.pop_back(); // Eliminate terminating character for final processing ('$')
 
+    // Evaluate final expression 
     int result = eval(input_str);
     cout << "Expressions value is " << result << '\n';
 
