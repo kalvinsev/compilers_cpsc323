@@ -38,41 +38,51 @@ int eval(vector<string>& tokens){
 }
 
 int main(){
-    vector<string> words;
-    vector<string> input_str;
-    
-    // Read input from the user
-    string input;
-    cout << "Enter a postfix expression with a $ at the end:\n";
-    getline(cin, input); // Read the full line of input from the user
+    char proceed = 'y';
+    while(proceed == 'y'){
 
-    // Create a stream object from the input string
-    istringstream stream(input);
-    string word;
-
-    // Extract and store each word from stream
-    while (stream >> word) {
-        input_str.push_back(word);
-        if(isalpha(word[0])) words.push_back(word);
-    }
-
-    for(auto word : words){
-        string val;
-        cout << "Enter the value of " << word << ": ";
-        cin >> val;
+        vector<string> words;
+        vector<string> input_str;
         
-        // Search for word in original input string and replace word with user provided value
-        for(int i = 0; i < input_str.size(); i++){
-            if(input_str[i] == word)
-                input_str[i] = val;
+        // Read input from the user
+        string input;
+        cout << "Enter a postfix expression with a $ at the end:\n";
+        getline(cin, input); // Read the full line of input from the user
+
+        // Create a stream object from the input string
+        istringstream stream(input);
+        string word;
+
+        // Extract and store each word from stream
+        while (stream >> word) {
+            input_str.push_back(word);
+            if(isalpha(word[0])) words.push_back(word);
         }
 
+        for(auto word : words){
+            string val;
+            cout << "Enter the value of " << word << ": ";
+            cin >> val;
+            
+            // Search for word in original input string and replace word with user provided value
+            for(int i = 0; i < input_str.size(); i++){
+                if(input_str[i] == word)
+                    input_str[i] = val;
+            }
+
+        }
+
+        // Eliminate terminating character for final processing ('$')
+        input_str.pop_back(); 
+
+        int result = eval(input_str);
+        cout << "Expressions value is " << result << '\n';
+
+        cout << "CONTINUE(y/n)? ";
+        cin >> proceed;  
+        cin.ignore();
+
     }
-
-    input_str.pop_back(); // Eliminate terminating character for final processing ('$')
-
-    int result = eval(input_str);
-    cout << "Expressions value is " << result << '\n';
 
     return 0;
 }
